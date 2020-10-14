@@ -9,13 +9,14 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>WebMap</RootNamespace>
     <AssemblyName>WebMap</AssemblyName>
-    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.6.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <WarningLevel>4</WarningLevel>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
+    <PlatformTarget>x64</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
@@ -41,10 +42,12 @@
     <StartupObject>WebMap.Program</StartupObject>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="BeatlesBlog.SimConnect">
-      <HintPath>..\..\..\Libraries\BeatlesBlog.SimConnect.SDK\Libs\BeatlesBlog.SimConnect.dll</HintPath>
+    <Reference Include="Microsoft.FlightSimulator.SimConnect, Version=10.0.62615.0, Culture=neutral, PublicKeyToken=5f523ae7e6e1b389, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>.\Microsoft.FlightSimulator.SimConnect.dll</HintPath>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
@@ -65,7 +68,7 @@
     </ApplicationDefinition>
     <Compile Include="Program.cs" />
     <Compile Include="RelayCommand.cs" />
-    <Compile Include="SimConnectInstance.cs" />
+    <Compile Include="SimConnectInstance2020.cs" />
     <Compile Include="ViewModelBase.cs" />
     <Compile Include="WebServer.cs" />
     <Page Include="MainWindow.xaml">
@@ -119,6 +122,10 @@
       </EmbeddedResource>
     </ItemGroup>
   </Target>
+  <PropertyGroup>
+    <PostBuildEvent>xcopy "$(ProjectDir)SimConnect.cfg" "." /Y
+xcopy "$(ProjectDir)SimConnect.dll" "." /Y</PostBuildEvent>
+  </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">
